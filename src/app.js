@@ -225,9 +225,15 @@ let template = (
       <form>
         {
           myDeck.deal().map(card => {
+            let styles = {
+              color: card.suit === 'Diamonds' || card.suit === 'Hearts' ? 'red' : 'black',
+              backgroundColor: 'white',
+              fontSize: '24px'
+            };
             return (
               <section
-                key={card._rank}>
+                key={card._rank}
+                style={styles}>
                 <p>
                   {valsObj[card.value]}
                 </p>
