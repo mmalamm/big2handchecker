@@ -1,6 +1,32 @@
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
 // ^ command to output app.js to the right file/folder
 
+// live-server public
+// ^ command to start hot reloading workflow
+
+const valsObj = {
+  'Three':'3',
+  'Four':'4',
+  'Five':'5',
+  'Six':'6',
+  'Seven':'7',
+  'Eight':'8',
+  'Nine':'9',
+  'Ten':'10',
+  'Jack':'J',
+  'Queen':'Q',
+  'King':'K',
+  'Ace':'A',
+  'Two':'2'
+};
+
+const suitsObj = {
+  'Spades':'♠',
+  'Hearts':'♥',
+  'Clovers': '♣',
+  'Diamonds': '♦'
+};
+
 const compRank = (a, b) => a._rank - b._rank;
 const maxRank = cards => cards.slice().sort(compRank).pop()._rank;
 class Card {
@@ -196,13 +222,23 @@ let template = (
 
     </div>
     <div>
-      <ul>
+      <form>
         {
           myDeck.deal().map(card => {
-            return <li key={card._rank}>{card.value} of {card.suit}</li>;
+            return (
+              <section
+                key={card._rank}>
+                <p>
+                  {valsObj[card.value]}
+                </p>
+                <p>
+                  {suitsObj[card.suit]}
+                </p>
+              </section>
+            );
           })
         }
-      </ul>
+      </form>
     </div>
   </div>
 );
