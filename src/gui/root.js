@@ -1,33 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
-const valsObj = {
-  'Three':'3',
-  'Four':'4',
-  'Five':'5',
-  'Six':'6',
-  'Seven':'7',
-  'Eight':'8',
-  'Nine':'9',
-  'Ten':'10',
-  'Jack':'J',
-  'Queen':'Q',
-  'King':'K',
-  'Ace':'A',
-  'Two':'2'
-};
-
-const suitsObj = {
-  'Spades':'♠',
-  'Hearts':'♥',
-  'Clovers': '♣',
-  'Diamonds': '♦'
-};
-
 import Deck from '../game/deck';
 const myDeck = new Deck();
 console.log(myDeck);
+
+import Card from './cardComponent';
 
 class Root extends React.Component {
   render() {
@@ -48,16 +26,11 @@ class Root extends React.Component {
                   fontSize: '24px'
                 };
                 return (
-                  <section
+                  <Card
+                    style={styles}
                     key={card._rank}
-                    style={styles}>
-                    <p>
-                      {valsObj[card.value]}
-                    </p>
-                    <p>
-                      {suitsObj[card.suit]}
-                    </p>
-                  </section>
+                    value={card.value}
+                    suit={card.suit} />
                 );
               })
             }
