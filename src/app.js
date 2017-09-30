@@ -3,6 +3,8 @@
 
 // live-server public
 // ^ command to start hot reloading workflow
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const valsObj = {
   'Three':'3',
