@@ -20,14 +20,8 @@ class Root extends React.Component {
           <form>
             {
               myDeck.deal().map(card => {
-                let styles = {
-                  color: card.suit === 'Diamonds' || card.suit === 'Hearts' ? 'red' : 'black',
-                  backgroundColor: 'white',
-                  fontSize: '24px'
-                };
                 return (
                   <Card
-                    style={styles}
                     key={card._rank}
                     value={card.value}
                     suit={card.suit} />

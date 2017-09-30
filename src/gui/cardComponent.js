@@ -26,17 +26,27 @@ const suitsObj = {
 };
 
 const Card = (props) => {
+
+  let styles = {
+    color: props.suit === 'Diamonds' || props.suit === 'Hearts' ? 'red' : 'black',
+    backgroundColor: 'white',
+    fontSize: '2rem',
+    border: '.1rem solid red',
+    margin: '.2rem',
+    borderRadius: '.3rem',
+    width: '4rem'
+  };
   return (
-    <section
+    <div
     key={props._rank}
-    style={props.styles}>
+    style={styles}>
       <p>
       {valsObj[props.value]}
       </p>
       <p>
       {suitsObj[props.suit]}
       </p>
-    </section>
+    </div>
 
   );
 }
