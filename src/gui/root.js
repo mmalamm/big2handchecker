@@ -17,7 +17,8 @@ class Root extends React.Component {
 
         </div>
         <div>
-          <form>
+          <form
+            style={{marginLeft: '2rem'}}>
             {
               myDeck.deal().map(card => {
                 return (

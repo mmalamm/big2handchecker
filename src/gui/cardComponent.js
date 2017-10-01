@@ -26,28 +26,39 @@ const suitsObj = {
 class Card extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
   }
+
+  handleClick(e) {
+    console.log(e.target);
+  }
+
   render() {
     let styles = {
-      color: this.props.suit === 'Diamonds' || this.props.suit === 'Hearts'
-        ? 'red'
-        : 'black',
+      color: this.props.suit === 'Diamonds' ||
+        this.props.suit === 'Hearts' ?
+        'red':
+        'black',
       backgroundColor: 'white',
-      fontSize: '2rem',
       border: '.1rem solid red',
       margin: '.2rem',
+      marginLeft: '-2rem',
       borderRadius: '.3rem',
-      width: '4rem'
+      width: '6rem'
     };
     let none = 'none';
     let unselectable = {
       MozUserSelect: none,
       WebkitUserSelect: none,
       msUserSelect: none,
-      pointerEvents: none
+      pointerEvents: none,
+      marginLeft: '1rem'
     };
     return (
-      <div key={this.props._rank} style={styles}>
+      <div
+        key={this.props._rank}
+        style={styles}
+        onClick={this.handleClick}>
         <p style={unselectable}>
           {valsObj[this.props.value]}
         </p>
