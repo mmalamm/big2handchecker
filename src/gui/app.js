@@ -7,14 +7,18 @@ class App extends React.Component {
     this.state = {
       userSelection: []
     };
+    this.cardClick = this.cardClick.bind(this);
   }
-  render() {
-    let cardClick = card => {
-      return e => {
-        console.log('event:', e.target);
-        console.log(card);
-      };
+
+  cardClick(card) {
+    return e => {
+      console.log('event:', e.target);
+      console.log(card);
     };
+  }
+
+
+  render() {
     return (
       <div>
         <h1>Big 2 Hand Checker</h1>
@@ -31,11 +35,11 @@ class App extends React.Component {
                 return (
                   <div
                     key={uniqKey}
-                    onClick={cardClick(card)}>
-                  <Card
-                    card={card}
-                    value={card.value}
-                    suit={card.suit} />
+                    onClick={this.cardClick(card)}>
+                    <Card
+                      card={card}
+                      value={card.value}
+                      suit={card.suit} />
                   </div>
                 );
               })
