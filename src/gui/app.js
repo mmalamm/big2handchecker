@@ -28,7 +28,7 @@ class App extends React.Component {
         </div>
         <div>
           <form
-            style={{marginLeft: '2rem'}}>
+            style={{marginLeft: '1rem'}}>
             {
               this.props.deck.deal().map(card => {
                 let uniqKey = Date.now().toString() + card.rank();

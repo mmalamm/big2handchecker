@@ -31,10 +31,10 @@ const Card = props => {
     backgroundColor: 'white',
     border: '.01rem solid gray',
     margin: '.2rem',
-    marginLeft: '-2rem',
+    marginLeft: '-1rem',
     borderRadius: '.3rem',
-    width: '6rem',
-    boxShadow: '-.1rem .2rem 3rem gray'
+    width: '4rem',
+    boxShadow: '-.1rem .2rem 2rem gray'
   };
   let none = 'none';
   let unselectable = {
