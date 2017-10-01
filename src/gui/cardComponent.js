@@ -30,7 +30,7 @@ class Card extends React.Component {
   }
 
   handleClick(e) {
-    console.log(e.target);
+    console.log(this.props.card);
   }
 
   render() {
@@ -56,7 +56,6 @@ class Card extends React.Component {
     };
     return (
       <div
-        key={this.props._rank}
         style={styles}
         onClick={this.handleClick}>
         <p style={unselectable}>

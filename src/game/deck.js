@@ -1,5 +1,5 @@
 import Card from './card';
-const compRank = (a, b) => a._rank - b._rank;
+const compRank = (a, b) => a.rank() - b.rank();
 
 class Deck {
   constructor() {

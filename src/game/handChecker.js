@@ -1,5 +1,5 @@
-const compRank = (a, b) => a._rank - b._rank;
-const maxRank = cards => cards.slice().sort(compRank).pop()._rank;
+const compRank = (a, b) => a.rank() - b.rank();
+const maxRank = cards => cards.slice().sort(compRank).pop().rank();
 
 class Hand {
   constructor(type, cards, strength, name) {
@@ -18,7 +18,7 @@ const handChecker = userInput => {
     name;
   switch (arr.length) {
   case 1:
-    str = arr[0]._rank;
+    str = arr[0].rank();
     name = `${arr[0].value} of ${arr[0].suit}`;
     return new Hand('Single', arr, 100 + str, name);
   case 2:
@@ -79,7 +79,7 @@ const handChecker = userInput => {
       }
       if (isStraight) {
         let str = maxRank(arr);
-        let mainCard = arr.find(c => c._rank === str);
+        let mainCard = arr.find(c => c.rank() === str);
         return {
           strength: str + 400,
           name: `Straight to ${mainCard.value} of ${mainCard.suit}`
