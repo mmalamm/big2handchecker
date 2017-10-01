@@ -1,4 +1,3 @@
-import React from 'react';
 
 const valsObj = {
   'Three': '3',
@@ -23,51 +22,40 @@ const suitsObj = {
   'Diamonds': '♦'
 };
 
-class Card extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
+const Card = props => {
+  let styles = {
+    color: props.suit === 'Diamonds' ||
+      props.suit === 'Hearts' ?
+      'red':
+      'black',
+    backgroundColor: 'white',
+    border: '.01rem solid gray',
+    margin: '.2rem',
+    marginLeft: '-2rem',
+    borderRadius: '.3rem',
+    width: '6rem',
+    boxShadow: '-.1rem .2rem 3rem gray'
+  };
+  let none = 'none';
+  let unselectable = {
+    MozUserSelect: none,
+    WebkitUserSelect: none,
+    msUserSelect: none,
+    pointerEvents: none,
+    marginLeft: '1rem'
+  };
+  return (
+    <div
+      style={styles}>
+      <p style={unselectable}>
+        {valsObj[props.value]}
+      </p>
+      <p style={unselectable}>
+        {suitsObj[props.suit]}
+      </p>
+    </div>
 
-  handleClick(e) {
-    console.log(this.props.card);
-  }
+  );
+};
 
-  render() {
-    let styles = {
-      color: this.props.suit === 'Diamonds' ||
-        this.props.suit === 'Hearts' ?
-        'red':
-        'black',
-      backgroundColor: 'white',
-      border: '.1rem solid red',
-      margin: '.2rem',
-      marginLeft: '-2rem',
-      borderRadius: '.3rem',
-      width: '6rem'
-    };
-    let none = 'none';
-    let unselectable = {
-      MozUserSelect: none,
-      WebkitUserSelect: none,
-      msUserSelect: none,
-      pointerEvents: none,
-      marginLeft: '1rem'
-    };
-    return (
-      <div
-        style={styles}
-        onClick={this.handleClick}>
-        <p style={unselectable}>
-          {valsObj[this.props.value]}
-        </p>
-        <p style={unselectable}>
-          {suitsObj[this.props.suit]}
-        </p>
-      </div>
-
-    );
-
-  }
-}
 export default Card;
