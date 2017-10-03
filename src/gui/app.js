@@ -8,7 +8,6 @@ class App extends React.Component {
     this.handleClear = this.handleClear.bind(this);
     this.newDeal = this.newDeal.bind(this);
     this.toggleSelect = this.toggleSelect.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       hand: this.props.deck.deal(),
       userSelection: [],
@@ -33,18 +32,15 @@ class App extends React.Component {
     }));
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.setState(() => ({ validSubmit: handChecker(this.state.userSelection) }));
-  }
-
   toggleSelect(card) {
     return e => this.setState(prevState => {
-      if (prevState.userSelection.indexOf(card) === -1) {
-        return { userSelection: prevState.userSelection.concat(card)};
-      } else {
-        return { userSelection: prevState.userSelection.filter(c => c !== card)};
-      }
+      let newSelection = (prevState.userSelection.indexOf(card) === -1) ?
+        prevState.userSelection.concat(card) :
+        prevState.userSelection.filter(c => c !== card);
+      return {
+        userSelection: newSelection,
+        validSubmit: handChecker(newSelection)
+      };
     });
   }
 
@@ -79,9 +75,6 @@ class App extends React.Component {
           </button>
           <button onClick={this.newDeal}>
             Deal
-          </button>
-          <button onClick={this.handleSubmit}>
-            Submit
           </button>
         </div>
         <div>

@@ -1,6 +1,7 @@
 const compRank = (a, b) => a.rank() - b.rank();
 const maxRank = cards => cards.slice().sort(compRank).pop().rank();
-import { uniq, isEqual } from 'lodash';
+import uniq from 'lodash/uniq';
+import isEqual from 'lodash/isEqual';
 const _ = { uniq, isEqual };
 
 class Hand {

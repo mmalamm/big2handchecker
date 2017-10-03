@@ -37,7 +37,8 @@ const Card = props => {
     marginTop: props.selected ? '0rem':'1rem',
     borderRadius: '.3rem',
     width: '4rem',
-    boxShadow: '-.1rem .2rem 1rem gray'
+    boxShadow: '-.1rem .2rem 1rem gray',
+    cursor: 'pointer'
   };
   let none = 'none';
   let unselectable = {
