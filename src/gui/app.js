@@ -4,36 +4,40 @@ import Card from './cardComponent';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClear = this.handleClear.bind(this);
+    this.newDeal = this.newDeal.bind(this);
+    this.toggleSelect = this.toggleSelect.bind(this);
     this.state = {
       userSelection: [],
       hand: this.props.deck.deal()
     };
-    // this.cardClick = this.cardClick.bind(this);
   }
 
-  // cardClick(card) {
-  //   return e => {
-  //     console.log('event:', e.target);
-  //     console.log(card);
-  //   };
-  // }
+  newDeal(e) {
+    e.preventDefault();
+    this.setState(() => {
+      return {hand: this.props.deck.deal()};
+    });
+  }
 
+  handleClear(e) {
+    e.preventDefault();
+    this.setState(() => {
+      return { userSelection: [] };
+    });
+  }
+
+  toggleSelect(card) {
+    return e => this.setState(prevState => {
+      if (prevState.userSelection.indexOf(card) === -1) {
+        return { userSelection: prevState.userSelection.concat(card)};
+      } else {
+        return { userSelection: prevState.userSelection.filter(c => c !== card)};
+      }
+    });
+  }
 
   render() {
-    let callback = card => {
-      return e => this.setState(prevState => {
-        if (prevState.userSelection.indexOf(card) === -1) {
-          return { userSelection: prevState.userSelection.concat(card)};
-        } else {
-          return { userSelection: prevState.userSelection.filter(c => c !== card)};
-        }
-      });
-    };
-    let handleClear = () => {
-      return e => this.setState(prevState => {
-        return { userSelection: []};
-      });
-    };
     return (
       <div>
         <h1>Big 2 Hand Checker</h1>
@@ -43,11 +47,13 @@ class App extends React.Component {
             {
               this.state.hand.map(card => {
                 let uniqKey = Date.now().toString() + card.rank();
+                let selectionState = this.state.userSelection.find(c => c === card);
                 return (
                   <div
                     key={uniqKey}
-                    onClick={callback(card)}>
+                    onClick={this.toggleSelect(card)}>
                     <Card
+                      selected={selectionState}
                       value={card.value}
                       suit={card.suit} />
                   </div>
@@ -57,24 +63,15 @@ class App extends React.Component {
           </form>
         </div>
         <div>
-          <form>
-            {
-              this.state.userSelection.map(card => {
-                let uniqKey = Date.now().toString() + card.rank();
-                return (
-                  <div
-                    key={uniqKey}>
-                    <Card
-                      value={card.value}
-                      suit={card.suit} />
-                  </div>
-                );
-              })
-            }
-          </form>
-          <button onClick={handleClear()}>
+          <button onClick={this.handleClear}>
             Clear Selection
           </button>
+          <button onClick={this.newDeal}>
+            Deal
+          </button>
+        </div>
+        <div>
+          {}
         </div>
       </div>
     );

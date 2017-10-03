@@ -1,3 +1,4 @@
+import React from 'react';
 
 const valsObj = {
   'Three': '3',
@@ -23,15 +24,17 @@ const suitsObj = {
 };
 
 const Card = props => {
+
   let styles = {
     color: props.suit === 'Diamonds' ||
-      props.suit === 'Hearts' ?
-      'red':
-      'black',
+    props.suit === 'Hearts' ?
+    'red':
+    'black',
     backgroundColor: 'white',
     border: '.01rem solid gray',
     margin: '.2rem',
     marginLeft: '-1rem',
+    marginTop: props.selected ? '0rem':'1rem',
     borderRadius: '.3rem',
     width: '4rem',
     boxShadow: '-.1rem .2rem 2rem gray'
@@ -46,7 +49,8 @@ const Card = props => {
   };
   return (
     <div
-      style={styles}>
+      style={styles}
+    >
       <p style={unselectable}>
         {valsObj[props.value]}
       </p>
@@ -56,6 +60,7 @@ const Card = props => {
     </div>
 
   );
+
 };
 
 export default Card;
