@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './cardComponent';
+import handChecker from '../game/handChecker';
 
 class App extends React.Component {
   constructor(props) {
@@ -7,24 +8,27 @@ class App extends React.Component {
     this.handleClear = this.handleClear.bind(this);
     this.newDeal = this.newDeal.bind(this);
     this.toggleSelect = this.toggleSelect.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       userSelection: [],
-      hand: this.props.deck.deal()
+      hand: this.props.deck.deal(),
+      validSubmit: null
     };
   }
 
   newDeal(e) {
     e.preventDefault();
-    this.setState(() => {
-      return {hand: this.props.deck.deal()};
-    });
+    this.setState(() => ({hand: this.props.deck.deal()}));
   }
 
   handleClear(e) {
     e.preventDefault();
-    this.setState(() => {
-      return { userSelection: [] };
-    });
+    this.setState(() => ({ userSelection: [] }));
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState(() => ({ validSubmit: handChecker(this.state.userSelection) }));
   }
 
   toggleSelect(card) {
@@ -69,9 +73,12 @@ class App extends React.Component {
           <button onClick={this.newDeal}>
             Deal
           </button>
+          <button onClick={this.handleSubmit}>
+            Submit
+          </button>
         </div>
         <div>
-          {}
+          { this.state.validSubmit && (<p>{this.state.validSubmit.name}</p>)}
         </div>
       </div>
     );

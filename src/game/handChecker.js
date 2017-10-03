@@ -1,5 +1,7 @@
 const compRank = (a, b) => a.rank() - b.rank();
 const maxRank = cards => cards.slice().sort(compRank).pop().rank();
+import { uniq, isEqual } from 'lodash';
+const _ = { uniq, isEqual };
 
 class Hand {
   constructor(type, cards, strength, name) {
@@ -127,3 +129,5 @@ const handChecker = userInput => {
     return null;
   }
 };
+
+export default handChecker;
