@@ -10,20 +10,27 @@ class App extends React.Component {
     this.toggleSelect = this.toggleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
-      userSelection: [],
       hand: this.props.deck.deal(),
+      userSelection: [],
       validSubmit: null
     };
   }
 
   newDeal(e) {
     e.preventDefault();
-    this.setState(() => ({hand: this.props.deck.deal()}));
+    this.setState(() => ({
+      hand: this.props.deck.deal(),
+      userSelection: [],
+      validSubmit: null
+    }));
   }
 
   handleClear(e) {
     e.preventDefault();
-    this.setState(() => ({ userSelection: [] }));
+    this.setState(() => ({
+      userSelection: [],
+      validSubmit: null
+    }));
   }
 
   handleSubmit(e) {
@@ -78,7 +85,27 @@ class App extends React.Component {
           </button>
         </div>
         <div>
-          { this.state.validSubmit && (<p>{this.state.validSubmit.name}</p>)}
+          { this.state.validSubmit && (
+            <div>
+              <p>{this.state.validSubmit.name}</p>
+              <form>
+                {
+                  this.state.validSubmit.cards.map(card => {
+                    let uniqKey = Date.now().toString() + card.rank();
+                    let selectionState = false;
+                    return (
+                      <div key={uniqKey}>
+                        <Card
+                          selected={selectionState}
+                          value={card.value}
+                          suit={card.suit} />
+                      </div>
+                    );
+                  })
+                }
+              </form>
+            </div>
+          )}
         </div>
       </div>
     );
